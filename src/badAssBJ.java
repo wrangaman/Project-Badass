@@ -19,7 +19,6 @@ class badAssBJ extends JFrame{
     private JButton stand = new JButton("Stand");
     private JSlider amountToBet = new JSlider(JSlider.HORIZONTAL, 0, 50, 25);
     private JTextField displayOfAmountToBet = new JTextField("");
-    private ImageIcon tableBackground = new ImageIcon("GU_brand.JPG");
 
     public badAssBJ(){
 
