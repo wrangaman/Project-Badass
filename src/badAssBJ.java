@@ -11,7 +11,7 @@ class badAssBJ extends JFrame{
     private JLabel chips = new JLabel("Chips");
     private JTextField chip = new JTextField();
     private JPanel playerPanel = new JPanel();
-    private JPanel tablePanel = new JPanel();
+    private tablePanel mainTable;
     private JPanel actionPanel = new JPanel();
     private JPanel dialogPanel = new JPanel();
     private JButton bet = new JButton("Place Bet");
@@ -21,6 +21,7 @@ class badAssBJ extends JFrame{
     private JTextField displayOfAmountToBet = new JTextField("");
 
     public badAssBJ(){
+        mainTable = new tablePanel();
 
         playerPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -56,7 +57,7 @@ class badAssBJ extends JFrame{
         gbc.gridy = 2;
         actionPanel.add(stand, gbc);
 
-        add(tablePanel, BorderLayout.NORTH);
+        add(mainTable, BorderLayout.NORTH);
         add(dialogPanel, BorderLayout.SOUTH);
         add(playerPanel, BorderLayout.WEST);
         add(actionPanel, BorderLayout.EAST);

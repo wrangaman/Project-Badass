@@ -9,7 +9,7 @@ public class Main {
         badAssBJ mainFrame = new badAssBJ();
         mainFrame.setSize(1000, 750);
         mainFrame.setTitle("BadAss BlackJack");
-        //mainFrame.setBackground(Color.GREEN);
+        mainFrame.setBackground(Color.GREEN);
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
