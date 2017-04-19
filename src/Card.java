@@ -1,3 +1,4 @@
+package blackjack;
 
 public class Card {
 	private int value;
@@ -12,10 +13,7 @@ public class Card {
 		setIsUsed(false);
 	}
 	public int getValue(){
-		if(9 < value) {
-			return 10;
-		}
-		return value + 1;
+		return value;
 	}
 	
 	public String getValueName(){
@@ -41,4 +39,8 @@ public class Card {
 	public void setIsUsed(boolean x){
 		isUsed = x;
 	}
+	public String toString(){
+		return getValueName() + " of " + getSuit();
+	}
 }
+	
