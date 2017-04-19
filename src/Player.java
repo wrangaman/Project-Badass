@@ -4,6 +4,7 @@ public class Player {
 	int chips;
 	Card[] hand;
 	int totalCards;
+	boolean blackJack;
 	
 	public Player(String n, int c) {
 		name = n;
@@ -11,7 +12,6 @@ public class Player {
 		hand = new Card[5];
 		totalCards = 0;
 	}
-
 
 	public String getName(){
 		return name;
@@ -22,7 +22,7 @@ public class Player {
 	}
 	
 	public void recieveCard(Card c){
-		if(totalCards < 5) {
+		if(totalCards < 5 && getTotalCards() < 22) {
 			hand[totalCards] = c;
 			totalCards++;
 		}
@@ -63,15 +63,24 @@ public class Player {
 		return hand;
 	}
 
-	/** Returns hand sum
+	/** Returns hand sum. If ace can be valued
 	 *
 	 * @return
 	 */
 	public int getTotalCards(){
 		int sum = 0;
+		boolean ace = false;
 		for(int i = 0; i < totalCards; i++){
 			sum = sum + hand[i].getValue();
+			if(hand[i].getValue() == 1) {
+			    ace = true;
+            }
 		}
+		if(ace) {
+		    if(sum + 10 < 22) {
+		        sum = sum + 10;
+            }
+        }
 		return sum;
 	}
 }

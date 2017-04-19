@@ -11,7 +11,12 @@ public class Card {
 		setSuit(s);
 		setIsUsed(false);
 	}
-	public int getValue(){return value + 1;}
+	public int getValue(){
+		if(9 < value) {
+			return 10;
+		}
+		return value + 1;
+	}
 	
 	public String getValueName(){
 		return name[value];
