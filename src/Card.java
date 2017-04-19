@@ -1,4 +1,3 @@
-package blackjack;
 
 public class Card {
 	private int value;
@@ -12,9 +11,7 @@ public class Card {
 		setSuit(s);
 		setIsUsed(false);
 	}
-	public int getValue(){
-		return value;
-	}
+	public int getValue(){return value + 1;}
 	
 	public String getValueName(){
 		return name[value];

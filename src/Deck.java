@@ -1,7 +1,8 @@
-package blackjack;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Deck {
-	Card deck[] = new Card[52]; 
+	private Card deck[] = new Card[52];
+
 	public Deck() {
 		int x = 0;
 		for(int i = 0; i < 4; i++){
@@ -13,13 +14,13 @@ public class Deck {
 	}
 	
 	public Card dealCard(){
-		int c = (int)((Math.random() * 52) + 1);
+		int c = ThreadLocalRandom.current().nextInt(0, 53);
 		while(deck[c].getIsUsed()){
-			c = (int)((Math.random() * 52) + 1);
+			c = ThreadLocalRandom.current().nextInt(0, 53);
 		}
 		deck[c].setIsUsed(true);
 		return deck[c];
 	}
-	
-	public Card
+
+
 }

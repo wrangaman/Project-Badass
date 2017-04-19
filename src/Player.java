@@ -1,66 +1,77 @@
-package blackjack;
 
 public class Player {
 	String name;
 	int chips;
-	Deck[] hand = new Deck[5];
+	Card[] hand;
 	int totalCards;
-	boolean ifBust;
-	int index = 0;
-	Deck d = new Deck();
 	
-	public Player() {
-		receiveCard();
-		receiveCard();
+	public Player(String n, int c) {
+		name = n;
+		chips = c;
+		hand = new Card[5];
+		totalCards = 0;
 	}
-	
-	public void receiveCard(){
-		hand[index].getCard();
-		index++;
-	}
-	
-	public int placeBet(int x){
-		setChips(getChips() - x);
-		return x;
-	}
-	
-	public Card getHand(){
-		
-	}
-	
-	public int getTotalCards(){
-		int sum = 0;
-		for(int i = 0; i < hand.length; i++){
-			hand[i].get
-		}
-	}
-	
-	public void setTotalCards(){
-		
-	}
-	
+
+
 	public String getName(){
 		return name;
 	}
-	
-	public void setName(String s){
-		name = s;
-	}
-	
+
 	public int getChips(){
 		return chips;
 	}
 	
-	public void setChips(int c){
-		chips = c;
-	}
-	
-	public void hit(){
-		
-	}
-	
-	public void stand(){
-		
+	public void recieveCard(Card c){
+		if(totalCards < 5) {
+			hand[totalCards] = c;
+			totalCards++;
+		}
 	}
 
+	/** Check if player hand sum > 21
+	 *
+	 * @return
+	 */
+	public boolean isBusted() {
+		if(21 < getTotalCards()) {
+			return true;
+		}
+		return false;
+	}
+
+	/** Remove number of chips bet from total chips
+	 *
+	 * @param x
+	 */
+	public void placeBet(int x){
+		chips = chips - x;
+	}
+
+	/** Add number of chips won to total chips
+	 *
+	 * @param x
+	 */
+	public void getPot(int x) {
+		chips = chips + x;
+	}
+
+	/** Return card array of hand
+	 *
+	 * @return
+	 */
+	public Card[] getHand(){
+		return hand;
+	}
+
+	/** Returns hand sum
+	 *
+	 * @return
+	 */
+	public int getTotalCards(){
+		int sum = 0;
+		for(int i = 0; i < totalCards; i++){
+			sum = sum + hand[i].getValue();
+		}
+		return sum;
+	}
 }
