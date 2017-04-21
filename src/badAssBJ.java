@@ -5,6 +5,7 @@ import java.awt.*;
 
 class badAssBJ extends JFrame{
 
+    private JButton startGame = new JButton("Start Game");
     private String[] name = {};
     private JComboBox<?> player = new JComboBox<Object>(name);
     private JLabel playerName = new JLabel("Name");
@@ -39,6 +40,9 @@ class badAssBJ extends JFrame{
         gbc.gridx = 1;
         gbc.gridy = 1;
         playerPanel.add(chip, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        playerPanel.add(startGame, gbc);
 
         actionPanel.setLayout(new GridBagLayout());
         gbc.gridx = 0;
