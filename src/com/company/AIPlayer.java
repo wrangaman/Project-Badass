@@ -1,10 +1,13 @@
 package com.company;
-/**
- * Created by Ben on 4/20/2017.
- */
+
 import java.util.concurrent.ThreadLocalRandom;
 
-
+/**
+ * AIPlayer class extends functionality of Player class by adding 2 functions to automate the decision making
+ *   necessary for a player in a game of BlackJack, namely deciding to hit/stand and how many chips to bet
+ *
+ * Created by Ben Rieckers on 4/18/2017.
+ */
 public class AIPlayer extends Player {
     private int difficulty;
     // List of names for potential AIPlayers

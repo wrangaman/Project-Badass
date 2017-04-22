@@ -1,5 +1,13 @@
 package com.company;
 
+/**
+ *
+ *
+ * TESTER PROGRAM FOR CARD, DECK, PLAYER, AIPLAYER CLASSES
+ *
+ *
+ *
+ * */
 public class BlackJack {
 
     public static void main(String[] args) {

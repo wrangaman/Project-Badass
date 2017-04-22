@@ -3,6 +3,12 @@ package com.company;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * tablePanel class creates and implements a custom JPanel for a game of Badass BlackJack. This custom panel
+ *   manages every player's hand...
+ *
+ *   Created by Chin Huynh on 4/17/2017
+ */
 public class tablePanel extends JPanel{
 
     private JToggleButton[] dealerCard = new JToggleButton[5];
