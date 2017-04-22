@@ -5,16 +5,19 @@ import java.awt.*;
 
 public class tablePanel extends JPanel{
 
+    Deck d = new Deck;
+    Player p = new Player("john",100);
+
     private JToggleButton[] dealerCard = new JToggleButton[5];
     private JToggleButton[] ai1Card = new JToggleButton[5];
     private JToggleButton[] ai2Card = new JToggleButton[5];
     private JToggleButton[] ai3Card = new JToggleButton[5];
     private JToggleButton[] playerCard = new JToggleButton[5];
 
-    private ImageIcon aHeart = new ImageIcon("images/Aheart.png");
-    private ImageIcon aDiamond = new ImageIcon("images/Adiamond.png");
-    private ImageIcon aClub = new ImageIcon("images/Aclub.png");
-    private ImageIcon aSpade = new ImageIcon("images/Aspade.png");
+    private ImageIcon aceHeart = new ImageIcon("images/Aheart.png");
+    private ImageIcon aceDiamond = new ImageIcon("images/Adiamond.png");
+    private ImageIcon aceClub = new ImageIcon("images/Aclub.png");
+    private ImageIcon aceSpade = new ImageIcon("images/Aspade.png");
 
     private ImageIcon twoHeart = new ImageIcon("images/2heart.png");
     private ImageIcon twoDiamond = new ImageIcon("images/2diamond.png");
@@ -82,13 +85,20 @@ public class tablePanel extends JPanel{
     public tablePanel() {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(5, 5, 5, 5);
-/*        setDealerHand(gbc,5);
-        setPlayerHand(gbc,5);
-        setAi1Hand(gbc,5);
-        setAi2Hand(gbc,5);
-        setAi3Hand(gbc,5);*/
+        setDealerHand(gbc, 5);
+        setPlayerHand(gbc, 5);
+        setAi1Hand(gbc, 5);
+        setAi2Hand(gbc, 5);
+        setAi3Hand(gbc, 5);
+    }
+
+    private void assignImage(int numOfCard) {
+        for (int i = 0; i < numOfCard; i++) {
+            if(p.getHand[i].getValueName().equ){
+                if()
+            }
+        }
     }
 
     private void setDealerHand(GridBagConstraints gbc, int numOfCard){
