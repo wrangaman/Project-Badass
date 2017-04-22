@@ -5,9 +5,6 @@ import java.awt.*;
 
 public class tablePanel extends JPanel{
 
-    Deck d = new Deck;
-    Player p = new Player("john",100);
-
     private JToggleButton[] dealerCard = new JToggleButton[5];
     private JToggleButton[] ai1Card = new JToggleButton[5];
     private JToggleButton[] ai2Card = new JToggleButton[5];
@@ -93,13 +90,13 @@ public class tablePanel extends JPanel{
         setAi3Hand(gbc, 5);
     }
 
-    private void assignImage(int numOfCard) {
+/*    private void assignImage(int numOfCard) {
         for (int i = 0; i < numOfCard; i++) {
             if(p.getHand[i].getValueName().equ){
                 if()
             }
         }
-    }
+    }*/
 
     private void setDealerHand(GridBagConstraints gbc, int numOfCard){
         gbc.gridx = 8;
