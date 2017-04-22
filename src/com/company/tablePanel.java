@@ -96,10 +96,25 @@ public class tablePanel extends JPanel{
         setAi3Hand(gbc, 5);
     }
 
-/*    private void assignImage(int numOfCard) {
+/*    private void assignImage(Card hand, int numOfCard) {
+        for(Card i : hand){
+            String name = i.getValueName();
+            String suit = i.getSuit();
+            switch(name){
+                case "Ace":
+                    switch (suit){
+                        case "Clubs":
+
+                    }
+            }
+        }
+
         for (int i = 0; i < numOfCard; i++) {
-            if(p.getHand[i].getValueName().equ){
-                if()
+            String name = hand.getValueName();
+            String suit = hand.getSuit();
+            switch (name){
+                case "Ace":
+
             }
         }
     }*/
