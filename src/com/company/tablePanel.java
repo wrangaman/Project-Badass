@@ -96,29 +96,167 @@ public class tablePanel extends JPanel{
         setAi3Hand(gbc, 5);
     }
 
-/*    private void assignImage(Card hand, int numOfCard) {
-        for(Card i : hand){
-            String name = i.getValueName();
-            String suit = i.getSuit();
-            switch(name){
-                case "Ace":
-                    switch (suit){
-                        case "Clubs":
-
-                    }
-            }
-        }
-
+    private void assignImage(Card[] hand, int numOfCard, JToggleButton[] arr) {
         for (int i = 0; i < numOfCard; i++) {
-            String name = hand.getValueName();
-            String suit = hand.getSuit();
-            switch (name){
-                case "Ace":
-
+            if (hand[i].getValueName().equals("Ace") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setIcon(aceHeart);
+            }
+            if (hand[i].getValueName().equals("Ace") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setIcon(aceDiamond);
+            }
+            if (hand[i].getValueName().equals("Ace") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setIcon(aceClub);
+            }
+            if (hand[i].getValueName().equals("Ace") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setIcon(aceSpade);
+            }
+            if (hand[i].getValueName().equals("Two") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setIcon(twoHeart);
+            }
+            if (hand[i].getValueName().equals("Two") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setIcon(twoDiamond);
+            }
+            if (hand[i].getValueName().equals("Two") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setIcon(twoClub);
+            }
+            if (hand[i].getValueName().equals("Two") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setIcon(twoSpade);
+            }
+            if (hand[i].getValueName().equals("Three") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setIcon(threeHeart);
+            }
+            if (hand[i].getValueName().equals("Three") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setIcon(threeDiamond);
+            }
+            if (hand[i].getValueName().equals("Three") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setIcon(threeClub);
+            }
+            if (hand[i].getValueName().equals("Three") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setIcon(threeSpade);
+            }
+            if (hand[i].getValueName().equals("Four") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setIcon(fourHeart);
+            }
+            if (hand[i].getValueName().equals("Four") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setIcon(fourDiamond);
+            }
+            if (hand[i].getValueName().equals("Four") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setIcon(fourClub);
+            }
+            if (hand[i].getValueName().equals("Four") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setIcon(fourSpade);
+            }
+            if (hand[i].getValueName().equals("Five") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setIcon(fiveHeart);
+            }
+            if (hand[i].getValueName().equals("Five") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setIcon(fiveDiamond);
+            }
+            if (hand[i].getValueName().equals("Five") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setIcon(fiveClub);
+            }
+            if (hand[i].getValueName().equals("Five") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setIcon(fiveSpade);
+            }
+            if (hand[i].getValueName().equals("Six") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setIcon(sixHeart);
+            }
+            if (hand[i].getValueName().equals("Six") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setIcon(sixDiamond);
+            }
+            if (hand[i].getValueName().equals("Six") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setIcon(sixClub);
+            }
+            if (hand[i].getValueName().equals("Six") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setIcon(sixSpade);
+            }
+            if (hand[i].getValueName().equals("Seven") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setIcon(sevenHeart);
+            }
+            if (hand[i].getValueName().equals("Seven") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setIcon(sevenDiamond);
+            }
+            if (hand[i].getValueName().equals("Seven") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setIcon(sevenClub);
+            }
+            if (hand[i].getValueName().equals("Seven") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setIcon(sevenSpade);
+            }
+            if (hand[i].getValueName().equals("Eight") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setIcon(eightHeart);
+            }
+            if (hand[i].getValueName().equals("Eight") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setIcon(eightDiamond);
+            }
+            if (hand[i].getValueName().equals("Eight") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setIcon(eightClub);
+            }
+            if (hand[i].getValueName().equals("Eight") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setIcon(eightSpade);
+            }
+            if (hand[i].getValueName().equals("Nine") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setIcon(nineHeart);
+            }
+            if (hand[i].getValueName().equals("Nine") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setIcon(nineDiamond);
+            }
+            if (hand[i].getValueName().equals("Nine") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setIcon(nineClub);
+            }
+            if (hand[i].getValueName().equals("Nine") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setIcon(nineSpade);
+            }
+            if (hand[i].getValueName().equals("Ten") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setIcon(tenHeart);
+            }
+            if (hand[i].getValueName().equals("Ten") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setIcon(tenDiamond);
+            }
+            if (hand[i].getValueName().equals("Ten") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setIcon(tenClub);
+            }
+            if (hand[i].getValueName().equals("Ten") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setIcon(tenSpade);
+            }
+            if (hand[i].getValueName().equals("Jack") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setIcon(jHeart);
+            }
+            if (hand[i].getValueName().equals("Jack") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setIcon(jDiamond);
+            }
+            if (hand[i].getValueName().equals("Jack") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setIcon(jClub);
+            }
+            if (hand[i].getValueName().equals("Jack") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setIcon(jSpade);
+            }
+            if (hand[i].getValueName().equals("Queen") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setIcon(qHeart);
+            }
+            if (hand[i].getValueName().equals("Queen") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setIcon(qDiamond);
+            }
+            if (hand[i].getValueName().equals("Queen") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setIcon(qClub);
+            }
+            if (hand[i].getValueName().equals("Queen") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setIcon(qSpade);
+            }
+            if (hand[i].getValueName().equals("King") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setIcon(kHeart);
+            }
+            if (hand[i].getValueName().equals("King") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setIcon(kDiamond);
+            }
+            if (hand[i].getValueName().equals("King") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setIcon(kClub);
+            }
+            if (hand[i].getValueName().equals("King") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setIcon(kSpade);
             }
         }
-    }*/
-
+    }
+    
     private void setDealerHand(GridBagConstraints gbc, int numOfCard){
         gbc.gridx = 8;
         gbc.gridy = 0;
