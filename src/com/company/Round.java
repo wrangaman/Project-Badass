@@ -1,4 +1,4 @@
-package blackjack;
+package com.company;
 
 import java.util.Scanner;
 

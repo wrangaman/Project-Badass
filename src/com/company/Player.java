@@ -1,4 +1,4 @@
-package blackjack;
+package com.company;
 
 public class Player {
 	String name;
@@ -13,6 +13,15 @@ public class Player {
 		chips = c;
 		hand = new Card[5];
 		totalCards = 0;
+	}
+
+	public Player() {
+		name =  "";
+		chips = 0;
+		hand = new Card[5];
+		totalCards = 0;
+		blackJack = false;
+		isOut = false;
 	}
 
 	public String getName(){
