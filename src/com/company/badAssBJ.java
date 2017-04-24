@@ -11,6 +11,8 @@ import java.awt.*;
  */
 class badAssBJ extends JFrame{
 
+    private final static String newline = "\n";
+    private JTextArea dialogBox;
     private JButton startGame = new JButton("Start Game");
     private String[] name = {};
     private JComboBox<?> player = new JComboBox<Object>(name);
@@ -27,13 +29,13 @@ class badAssBJ extends JFrame{
     private JSlider amountToBet = new JSlider(JSlider.HORIZONTAL, 0, 50, 25);
     private JTextField displayOfAmountToBet = new JTextField("");
 
-    public badAssBJ(){
+    public badAssBJ() {
         mainTable = new tablePanel();
 
         playerPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(5,5,5,5);
+        gbc.insets = new Insets(5, 5, 5, 5);
         gbc.gridx = 0;
         gbc.gridy = 0;
         playerPanel.add(playerName, gbc);
@@ -66,6 +68,14 @@ class badAssBJ extends JFrame{
         gbc.gridx = 1;
         gbc.gridy = 2;
         actionPanel.add(stand, gbc);
+
+        dialogBox = new JTextArea(10, 100);
+        JScrollPane scrollPane = new JScrollPane(dialogBox);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        dialogBox.setLineWrap(true);
+        dialogBox.setWrapStyleWord(true);
+        dialogBox.setEditable(false);
+        dialogPanel.add(scrollPane);
 
         add(mainTable, BorderLayout.NORTH);
         add(dialogPanel, BorderLayout.SOUTH);

@@ -11,10 +11,10 @@ import java.awt.*;
  */
 public class tablePanel extends JPanel{
 
-    private JToggleButton[] dealerCard = new JToggleButton[5];
     private JToggleButton[] ai1Card = new JToggleButton[5];
     private JToggleButton[] ai2Card = new JToggleButton[5];
     private JToggleButton[] ai3Card = new JToggleButton[5];
+    private JToggleButton[] ai4Card = new JToggleButton[5];
     private JToggleButton[] playerCard = new JToggleButton[5];
 
     private ImageIcon aceHeart = new ImageIcon("images/Aheart.png");
@@ -89,11 +89,11 @@ public class tablePanel extends JPanel{
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
-        setDealerHand(gbc, 5);
         setPlayerHand(gbc, 5);
         setAi1Hand(gbc, 5);
         setAi2Hand(gbc, 5);
         setAi3Hand(gbc, 5);
+        setAi4Hand(gbc, 5);
     }
 
     private void assignImage(Card[] hand, int numOfCard, JToggleButton[] arr) {
@@ -256,18 +256,18 @@ public class tablePanel extends JPanel{
             }
         }
     }
-    
-    private void setDealerHand(GridBagConstraints gbc, int numOfCard){
+
+    private void setAi1Hand(GridBagConstraints gbc, int numOfCard){
         gbc.gridx = 8;
         gbc.gridy = 0;
-        add(new JLabel("Dealer's Hand"), gbc);
+        add(new JLabel("AI_1's Hand"), gbc);
         int xcor = 6;
         int ycor = 1;
         for (int i = 0; i <= numOfCard - 1; i++) {
             if (ycor == 1) {
                 gbc.gridx = xcor;
                 gbc.gridy = ycor;
-                add(dealerCard[i] = new JToggleButton(), gbc);
+                add(ai1Card[i] = new JToggleButton(backOfCard), gbc);
                 ycor = 2;
             }
             if(ycor == 2){
@@ -301,17 +301,17 @@ public class tablePanel extends JPanel{
         }
     }
 
-    private void setAi1Hand(GridBagConstraints gbc, int numOfCard){
+    private void setAi2Hand(GridBagConstraints gbc, int numOfCard){
         gbc.gridx = 2;
         gbc.gridy = 2;
-        add(new JLabel("AI_1's Hand"), gbc);
+        add(new JLabel("AI_2's Hand"), gbc);
         int xcor = 0;
         int ycor = 3;
         for (int i = 0; i <= numOfCard - 1; i++) {
             if (ycor == 3) {
                 gbc.gridx = xcor;
                 gbc.gridy = ycor;
-                add(ai1Card[i] = new JToggleButton(), gbc);
+                add(ai2Card[i] = new JToggleButton(backOfCard), gbc);
                 ycor = 4;
             }
             if(ycor == 4){
@@ -323,17 +323,17 @@ public class tablePanel extends JPanel{
         }
     }
 
-    private void setAi2Hand(GridBagConstraints gbc, int numOfCard){
+    private void setAi3Hand(GridBagConstraints gbc, int numOfCard){
         gbc.gridx = 11;
         gbc.gridy = 4;
-        add(new JLabel("AI_2's Hand"), gbc);
+        add(new JLabel("AI_3's Hand"), gbc);
         int xcor = 9;
         int ycor = 5;
         for (int i = 0; i <= numOfCard - 1; i++) {
             if (ycor == 5) {
                 gbc.gridx = xcor;
                 gbc.gridy = ycor;
-                add(ai2Card[i] = new JToggleButton(), gbc);
+                add(ai3Card[i] = new JToggleButton(backOfCard), gbc);
                 ycor = 6;
             }
             if(ycor == 6){
@@ -345,17 +345,17 @@ public class tablePanel extends JPanel{
         }
     }
 
-    private void setAi3Hand(GridBagConstraints gbc, int numOfCard){
+    private void setAi4Hand(GridBagConstraints gbc, int numOfCard){
         gbc.gridx = 14;
         gbc.gridy = 2;
-        add(new JLabel("AI_3's Hand"), gbc);
+        add(new JLabel("AI_4's Hand"), gbc);
         int xcor = 12;
         int ycor = 3;
         for (int i = 0; i <= numOfCard - 1; i++) {
             if (ycor == 3) {
                 gbc.gridx = xcor;
                 gbc.gridy = ycor;
-                add(ai3Card[i] = new JToggleButton(), gbc);
+                add(ai4Card[i] = new JToggleButton(backOfCard), gbc);
                 ycor = 4;
             }
             if(ycor == 4){
