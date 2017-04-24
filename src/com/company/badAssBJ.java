@@ -28,10 +28,11 @@ class badAssBJ extends JFrame{
     private JPanel mainTable;
     private JPanel actionPanel = new JPanel();
     private JPanel dialogPanel = new JPanel();
+    private JPanel centerPanel = new JPanel();
     private JButton bet = new JButton("Place Bet");
     private JButton hit = new JButton("Hit");
     private JButton stand = new JButton("Stand");
-    private JSlider amountToBet = new JSlider();
+    private JLabel amountToBet = new JLabel("Enter the amount to bet: ");
     private JTextField displayOfAmountToBet = new JTextField("");
     private JLabel pot = new JLabel("Pot: 0");
 
@@ -124,6 +125,7 @@ class badAssBJ extends JFrame{
 
     }*/
     public badAssBJ() {
+        pot.setFont(new Font("Arial", Font.PLAIN, 30));
         // Make editable combobox
         player = new JComboBox<>(model);
         player.setEditable(true);
@@ -133,10 +135,9 @@ class badAssBJ extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 int index = player.getSelectedIndex();
-                if(index >= 0) {
+                if (index >= 0) {
                     selectedIndex = index;
-                }
-                else if("comboBoxEdited".equals(e.getActionCommand())) {
+                } else if ("comboBoxEdited".equals(e.getActionCommand())) {
                     Object newValue = model.getSelectedItem();
                     model.addElement(newValue);
                     player.setSelectedItem(newValue);
@@ -145,9 +146,6 @@ class badAssBJ extends JFrame{
             }
         });
         player.setSelectedIndex(0);
-
-
-
 
 
         startGame.addActionListener(new StartRoundAction());
@@ -200,10 +198,16 @@ class badAssBJ extends JFrame{
         dialogBox.setEditable(false);
         dialogPanel.add(scrollPane);
 
+        mainTable.setBackground(Color.GREEN);
+        dialogPanel.setBackground(Color.GREEN);
+        playerPanel.setBackground(Color.GREEN);
+        actionPanel.setBackground(Color.GREEN);
+        centerPanel.setBackground(Color.GREEN);
         add(mainTable, BorderLayout.NORTH);
         add(dialogPanel, BorderLayout.SOUTH);
         add(playerPanel, BorderLayout.WEST);
         add(actionPanel, BorderLayout.EAST);
+        add(centerPanel, BorderLayout.CENTER);
         pack();
     }
 
@@ -234,21 +238,6 @@ class badAssBJ extends JFrame{
             dialogBox.append("Welcome " + user.getName() + "!" + newline);
             dialogBox.append("Place your bet." + newline);
 
-            // Update Slider
-            amountToBet = new JSlider(JSlider.HORIZONTAL, 1, user.getChips(), user.getChips() / 2);
-            amountToBet.setMinorTickSpacing(5);
-            amountToBet.setMajorTickSpacing(25);
-            amountToBet.setSnapToTicks(true);
-            amountToBet.setPaintTicks(true); /****************************/
-            amountToBet.addChangeListener(new ChangeListener() {
-                @Override
-                public void stateChanged(ChangeEvent e) {
-                    JSlider source = (JSlider)e.getSource();
-                    if (!source.getValueIsAdjusting()) {
-                        displayOfAmountToBet.setText(Integer.toString(amountToBet.getValue()));
-                    }
-                }
-            });
             startGame.setEnabled(false);
             bet.addActionListener(new PlaceBetAction());
             revalidate();
