@@ -1,19 +1,15 @@
-package blackjack;
+package com.company;
 
 import java.util.Scanner;
 
 public class Round {
-	Scanner scan = new Scanner(System.in);
-	Scanner in = new Scanner(System.in);
 	Deck d = new Deck();
 	Player[] player;
 	String[] name = {"Dealer", "John", "Greg", "Timn", "Rob"};
 	int pot;
-	public Round() {
-		player = new Player[5];
-		for(int i = 0; i < player.length; i++){
-			player[i] = new Player(name[i], 100);
-		}
+
+	public Round(Player[] atTable) {
+		player = atTable;
 	}
 	
 	public void playRound(){
@@ -27,12 +23,12 @@ public class Round {
 				if(!p.getIsOut()){
 					dealFirstCards(p, d);
 					displayHand(p);
-					pot += placeBet(p, scan);
+					//pot += placeBet(p, scan);
 				}
 			}
 			for(Player e : player){
 				if(!e.getIsOut()){
-					hitOrStand(e, d, in);
+					//hitOrStand(e, d, in);
 				}
 			}
 			System.out.println(getWinner(player).getName() + " won $" + pot);

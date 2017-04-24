@@ -11,7 +11,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class AIPlayer extends Player {
     private int difficulty;
     // List of names for potential AIPlayers
-    private String[] names = {"Jack", "Jill", "John", "Jane"};
+    private String[] names = {"Bruce", "Greg", "Octavious", "Jake", "Willis", "Beatrice", "Orval", "Opal", "Margie",
+            "Jack", "Jill", "Lafawnda", "Destiny", "Rachael", "Lolita", "Spike", "Peach", "Daisy", "John", "Jane"};
 
     /**Calls Player class constructor with random name from name list and random number of chips.
      *  Also sets difficulty of AIPlayer
@@ -23,7 +24,7 @@ public class AIPlayer extends Player {
 
         // Give AIPlayer random name and random number of chips
         name = names[ThreadLocalRandom.current().nextInt(0, names.length)];
-        chips = ThreadLocalRandom.current().nextInt(50, 200);
+        chips = 100;
 
         difficulty = diff;
     }
@@ -58,7 +59,7 @@ public class AIPlayer extends Player {
      * @return Integer amount of chips for AIPlayer to bet.
      */
     public int amountToBet(int min) {
-        int base = min * difficulty; // Smallest bet made by AIPlayer is min*difficulty
-        return ThreadLocalRandom.current().nextInt(base, (base + min));
+        int base = min + difficulty; // Smallest bet made by AIPlayer is min*difficulty
+        return ThreadLocalRandom.current().nextInt(base, 2 * (base + min));
     }
 }

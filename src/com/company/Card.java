@@ -8,6 +8,7 @@ package com.company;
  */
 public class Card {
     private int value;
+    private int nameValue;
     private int suit;
     private boolean isUsed;
     String[] name = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
@@ -22,7 +23,16 @@ public class Card {
     public Card(int v, int s) {
         setValue(v);
         setSuit(s);
+        setNameValue(v);
         setIsUsed(false);
+    }
+
+    public int getNameValue() {
+        return nameValue;
+    }
+
+    public void setNameValue(int n) {
+        nameValue = n;
     }
 
     /**
@@ -40,7 +50,7 @@ public class Card {
      * @return This card's value as a string
      */
     public String getValueName(){
-        return name[value];
+        return name[nameValue - 1];
     }
 
     /**
@@ -49,7 +59,12 @@ public class Card {
      * @param v This card's value (0 - 12)
      */
     public void setValue(int v){
-        value = v;
+        if(v > 10) {
+            value = 10;
+        }
+        else {
+            value = v;
+        }
     }
 
     /**
@@ -58,7 +73,7 @@ public class Card {
      * @return This card's suit as a string
      */
     public String getSuit(){
-        return suitname[suit];
+        return suitname[suit - 1];
     }
 
     /**

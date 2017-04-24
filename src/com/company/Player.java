@@ -1,4 +1,4 @@
-package blackjack;
+package com.company;
 
 public class Player {
 	String name;
@@ -19,7 +19,7 @@ public class Player {
 		name = "";
 		chips = 0;
 		hand = new Card[5];
-		toralCards = 0;
+		totalCards = 0;
 		blackJack = false;
 		isOut = false;
 	}
@@ -45,6 +45,10 @@ public class Player {
 			hand[totalCards] = c;
 			totalCards++;
 		}
+	}
+
+	public int getNumOfCards() {
+		return totalCards;
 	}
 
 	/** Check if player hand sum > 21
@@ -118,8 +122,9 @@ public class Player {
 	 */
 	public int setScore(){
 		int total = getTotalCards();
-		if(totalCards == 5 && getTotalCards() == 21){
+		if(totalCards == 5 && getTotalCards() <= 21){
 			total = 21;
+			blackJack = true;
 		}
 		return total;
 	}
