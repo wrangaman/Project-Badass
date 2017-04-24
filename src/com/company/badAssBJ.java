@@ -3,6 +3,12 @@ package com.company;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * badAssBJ class creates and implements a custom JFrame used for the game of Badass BlackJack.
+ *   Determines if user is new or returning, creates a tablePanel...
+ *
+ *   Created by Chin Huynh on 4/17/2017
+ */
 class badAssBJ extends JFrame{
 
     private JButton startGame = new JButton("Start Game");

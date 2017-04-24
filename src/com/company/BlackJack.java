@@ -1,14 +1,23 @@
+package com.company;
 
+/**
+ *
+ *
+ * TESTER PROGRAM FOR CARD, DECK, PLAYER, AIPLAYER CLASSES
+ *
+ *
+ *
+ * */
 public class BlackJack {
 
-	public static void main(String[] args) {
-		Deck d = new Deck();
+    public static void main(String[] args) {
+        Deck d = new Deck();
 
         Player player = new Player("Joe", 100);
         player.recieveCard(d.dealCard());
         player.recieveCard(d.dealCard());
 
-		System.out.println(player.getName());
+        System.out.println(player.getName());
         System.out.println(player.getChips());
         Card[] cards = player.getHand();
         System.out.println("Card 0 value: " + cards[0].getValue());
@@ -22,6 +31,6 @@ public class BlackJack {
         System.out.println(player.isBusted());
 
 
-	}
+    }
 
 }
