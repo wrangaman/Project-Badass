@@ -1,3 +1,4 @@
+package blackjack;
 
 public class Player {
 	String name;
@@ -5,6 +6,7 @@ public class Player {
 	Card[] hand;
 	int totalCards;
 	boolean blackJack;
+	boolean isOut;
 	
 	public Player(String n, int c) {
 		name = n;
@@ -21,8 +23,16 @@ public class Player {
 		return chips;
 	}
 	
+	public boolean getIsOut(){
+		return isOut;
+	}
+	
+	public void setIsOut(boolean x){
+		isOut = x;
+	}
+	
 	public void recieveCard(Card c){
-		if(totalCards < 5 && getTotalCards() < 22) {
+		if(totalCards < 5 && getTotalCards() < 22 && !isOut){
 			hand[totalCards] = c;
 			totalCards++;
 		}
@@ -82,5 +92,31 @@ public class Player {
             }
         }
 		return sum;
+	}
+	/** prints hand
+	 * @return 
+	 *
+	 * @return
+	 */
+	public void printHand(){
+		for(Card i : hand){
+			if(i != null)
+				System.out.println(i.toString());
+		}
+	}
+	/** Set score to 21 if player if has 5 card in hand and total is under 21
+	 * @return 
+	 */
+	public int setScore(){
+		int total = getTotalCards();
+		if(totalCards == 5 && getTotalCards() == 21){
+			total = 21;
+		}
+		return total;
+	}
+	
+	public void resetHand(){
+		hand = new Card[5];
+		totalCards = 0;
 	}
 }

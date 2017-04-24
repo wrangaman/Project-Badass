@@ -10,8 +10,8 @@ public class Deck {
 	public Deck() {
 		deck = new Card[52];
 		int x = 0;
-		for(int i = 0; i < 4; i++){
-			for(int j = 0; j < 13; j++){
+		for(int i = 1; i < 5; i++){
+			for(int j = 1; j < 14; j++){
 				deck[x] = new Card(j, i);
 				x++;
 			}
@@ -24,10 +24,10 @@ public class Deck {
 	}
 	
 	public void shuffleDeck(){
+		setIsUsed();
 		List<Card> list =  Arrays.asList(deck);
 		Collections.shuffle(list);
 		deck = list.toArray(deck);
-		setIsUsed();
 	}
 		
 	public Card dealCard(){
