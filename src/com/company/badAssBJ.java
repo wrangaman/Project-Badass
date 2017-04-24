@@ -362,10 +362,13 @@ class badAssBJ extends JFrame{
         }
 
         public void findAwardWinner() {
-            int maxScore = user.getTotalCards();
+            int maxScore = 0;
+            if(user.getTotalCards() <= 21) {
+                maxScore = user.getTotalCards();
+            }
             int winPlayer = 0; // 0 = user. 1 = ai1. 2 = ai2 .......
             for(int i = 0; i < 4; i++) {
-                if(AIPlayers[i].getTotalCards() > maxScore) {
+                if(AIPlayers[i].getTotalCards() > maxScore && AIPlayers[i].getTotalCards() <= 21) {
                     maxScore = AIPlayers[i].getTotalCards();
                     winPlayer = i + 1;
                 }
