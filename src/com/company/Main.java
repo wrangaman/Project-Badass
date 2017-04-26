@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         badAssBJ mainFrame = new badAssBJ();
-        mainFrame.setSize(1000, 750);
+        mainFrame.setSize(1500, 1000);
         mainFrame.setTitle("BadAss BlackJack");
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -32,7 +32,7 @@ class badAssBJ extends JFrame{
     private JButton bet = new JButton("Place Bet");
     private JButton hit = new JButton("Hit");
     private JButton stand = new JButton("Stand");
-    private JLabel amountToBet = new JLabel("Enter the amount to bet: ");
+    private JLabel amountToBet = new JLabel("Enter the amount to bet: (Integers Only)");
     private JTextField displayOfAmountToBet = new JTextField("");
     private JLabel pot = new JLabel("Pot: 0");
 
@@ -267,22 +267,36 @@ class badAssBJ extends JFrame{
 
         public void actionPerformed(ActionEvent event) {
             roundPot = 0;
-            userBet = Integer.parseInt(displayOfAmountToBet.getText());
-            roundPot = roundPot + userBet;
-            user.placeBet(userBet);
-            dialogBox.append("You bet " + userBet + " chips" + newline);
-
-            for(AIPlayer ai : AIPlayers){
-                int aiBet = ai.amountToBet(1);
-                ai.placeBet(aiBet);
-                roundPot = roundPot + aiBet;
-                dialogBox.append(ai.getName() + " bet " + aiBet + " chips" + newline);
+            int maxBet = Integer.parseInt(chip.getText());
+            int currBet = Integer.parseInt(displayOfAmountToBet.getText());
+            JFrame errorFrame = new JFrame();
+            if (currBet > maxBet || currBet < 1) {
+                JOptionPane.showMessageDialog(errorFrame, "The amount you entered is invalid. You can only enter a number between 1 and the amount of chips that you have.",
+                        "Input Error",
+                        JOptionPane.ERROR_MESSAGE);
+                displayOfAmountToBet.setText("");
             }
-            pot.setText("Pot: " + roundPot);
-            dialogBox.append("Total pot this round: " + roundPot + newline);
-            bet.setEnabled(false);
-            hit.addActionListener(new HitAction());
-            stand.addActionListener(new StandAction());
+            while (displayOfAmountToBet.getText() != null) {
+                userBet = Integer.parseInt(displayOfAmountToBet.getText());
+                displayOfAmountToBet.setText("");
+                roundPot = roundPot + userBet;
+                user.placeBet(userBet);
+                dialogBox.append("You bet " + userBet + " chips" + newline);
+
+                for (AIPlayer ai : AIPlayers) {
+                    int aiBet = ai.amountToBet(1);
+                    ai.placeBet(aiBet);
+                    roundPot = roundPot + aiBet;
+                    dialogBox.append(ai.getName() + " bet " + aiBet + " chips" + newline);
+                }
+                pot.setText("Pot: " + roundPot);
+                dialogBox.append("Total pot this round: " + roundPot + newline);
+                int updatedChips = user.getChips();
+                chip.setText(Integer.toString(updatedChips));
+                bet.setEnabled(false);
+                hit.addActionListener(new HitAction());
+                stand.addActionListener(new StandAction());
+            }
         }
     }
 
@@ -336,9 +350,7 @@ class badAssBJ extends JFrame{
             findAwardWinner();
             if(user.getChips() > 0) {
                 bet.setEnabled(true);
-                //for(int i = 0; i < 20; i++) {
-                    dialogBox.append(newline);
-                //}
+                dialogBox.append(newline);
                 dialogBox.append("New round, place your bets." + newline);
             }
             user.resetHand();
@@ -376,11 +388,15 @@ class badAssBJ extends JFrame{
 
             if(winPlayer == 0) {
                 user.getPot(roundPot);
-                dialogBox.append("You won the round! Your total winnings are " + roundPot + " chips " + newline);
+                int newWonChips = user.getChips();
+                chip.setText(Integer.toString(newWonChips));
+                dialogBox.append("You won the round! Your total winnings are " + roundPot + " chips." + newline);
             }
             else {
+                int newLostChips = user.getChips();
+                chip.setText(Integer.toString(newLostChips));
                 AIPlayers[winPlayer - 1].getPot(roundPot);
-                dialogBox.append(AIPlayers[winPlayer - 1].getName() + " won this round with " + AIPlayers[winPlayer - 1].getTotalCards() + " for " + roundPot + " chips" + newline);
+                dialogBox.append(AIPlayers[winPlayer - 1].getName() + " won this round with " + AIPlayers[winPlayer - 1].getTotalCards() + " for " + roundPot + " chips." + newline);
             }
         }
 
