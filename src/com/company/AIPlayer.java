@@ -38,9 +38,9 @@ public class AIPlayer extends Player {
         int handSum = getTotalCards();
         int flag = ThreadLocalRandom.current().nextInt(0, 10); // Generate random number between 1-10
 
-        // If hand is small or (90% chance)
+        // If hand is small or (80% chance)
         if(handSum < 17) {
-            if(handSum < 13 || flag < 9) {
+            if(handSum < 13 || flag < 8) {
                 hit = true;
             }
         }
@@ -59,7 +59,7 @@ public class AIPlayer extends Player {
      * @return Integer amount of chips for AIPlayer to bet.
      */
     public int amountToBet(int min) {
-        int base = min + difficulty; // Smallest bet made by AIPlayer is min*difficulty
-        return ThreadLocalRandom.current().nextInt(base, 2 * (base + min));
+        int base = (min * 3) / 4; // Smallest bet made by AIPlayer is min*difficulty
+        return ThreadLocalRandom.current().nextInt(base, 2 * base);
     }
 }

@@ -3,6 +3,7 @@ package com.company;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.util.Arrays;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +36,7 @@ class badAssBJ extends JFrame{
     private JLabel amountToBet = new JLabel("Enter the amount to bet: (Integers Only)");
     private JTextField displayOfAmountToBet = new JTextField("");
     private JLabel pot = new JLabel("Pot: 0");
+    private JButton playAgain = new JButton("Play Again");
 
     private JToggleButton[] ai1Card = new JToggleButton[5];
     private JToggleButton[] ai2Card = new JToggleButton[5];
@@ -125,6 +127,7 @@ class badAssBJ extends JFrame{
 
     }*/
     public badAssBJ() {
+        playAgain.setVisible(false);
         pot.setFont(new Font("Arial", Font.PLAIN, 30));
         // Make editable combobox
         player = new JComboBox<>(model);
@@ -172,6 +175,9 @@ class badAssBJ extends JFrame{
         gbc.gridx = 0;
         gbc.gridy = 2;
         playerPanel.add(startGame, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        playerPanel.add(playAgain, gbc);
 
         actionPanel.setLayout(new GridBagLayout());
         gbc.gridx = 0;
@@ -213,6 +219,11 @@ class badAssBJ extends JFrame{
 
     class StartRoundAction implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+            playAgain.setVisible(false);
+            stand.setEnabled(false);
+            hit.setEnabled(false);
+            bet.setEnabled(true);
+            mainTable.removeAll();
             // Make deck, player and AI objects
             user = new Player(player.getSelectedItem().toString(), Integer.parseInt(chip.getText()));
             AIPlayers = new AIPlayer[4];
@@ -225,17 +236,27 @@ class badAssBJ extends JFrame{
             dealFirstCards();
             // Update hand displays
             setPlayerHand(gbc, user.getNumOfCards(), user.getName());
-            assignImage(user.getHand(), user.getNumOfCards(), playerCard);
+            assignImage(user.getHand(), user.getNumOfCards(), playerCard, 0);
             user.printHand();
             setAi1Hand(gbc, AIPlayers[0].getNumOfCards(), AIPlayers[0].getName());
             setAi2Hand(gbc, AIPlayers[1].getNumOfCards(), AIPlayers[1].getName());
             setAi3Hand(gbc, AIPlayers[2].getNumOfCards(), AIPlayers[2].getName());
             setAi4Hand(gbc, AIPlayers[3].getNumOfCards(), AIPlayers[3].getName());
+
+            initialBackOfCard(AIPlayers[0].getNumOfCards(),ai1Card, AIPlayers[0]);
+            initialBackOfCard(AIPlayers[1].getNumOfCards(),ai2Card, AIPlayers[1]);
+            initialBackOfCard(AIPlayers[2].getNumOfCards(),ai3Card, AIPlayers[2]);
+            initialBackOfCard(AIPlayers[3].getNumOfCards(),ai4Card, AIPlayers[3]);
+
+            revalidate();
+            repaint();
+
             setPot(gbc);
 
 
             // Update dialog box
             dialogBox.append("Welcome " + user.getName() + "!" + newline);
+            dialogBox.append(user.getName() + ", your total is " + user.getTotalCards() + "." + newline);
             dialogBox.append("Place your bet." + newline);
 
             startGame.setEnabled(false);
@@ -266,6 +287,8 @@ class badAssBJ extends JFrame{
         int userBet;
 
         public void actionPerformed(ActionEvent event) {
+            hit.setEnabled(true);
+            stand.setEnabled(true);
             roundPot = 0;
             int maxBet = Integer.parseInt(chip.getText());
             int currBet = Integer.parseInt(displayOfAmountToBet.getText());
@@ -284,7 +307,7 @@ class badAssBJ extends JFrame{
                 dialogBox.append("You bet " + userBet + " chips" + newline);
 
                 for (AIPlayer ai : AIPlayers) {
-                    int aiBet = ai.amountToBet(1);
+                    int aiBet = ai.amountToBet(userBet);
                     ai.placeBet(aiBet);
                     roundPot = roundPot + aiBet;
                     dialogBox.append(ai.getName() + " bet " + aiBet + " chips" + newline);
@@ -302,10 +325,10 @@ class badAssBJ extends JFrame{
 
     class HitAction implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            if(!user.isBusted() || user.getHand().length < 5) {
+            if(user.getTotalCards() <= 21 || user.getHand().length < 5) {
                 user.recieveCard(deck.dealCard());
                 setPlayerHand(gbc, user.getNumOfCards(), user.getName());
-                assignImage(user.getHand(), user.getNumOfCards(), playerCard);
+                assignImage(user.getHand(), user.getNumOfCards(), playerCard, 0);
                 dialogBox.append("Your new total is " + user.getTotalCards() + newline);
                 user.printHand();
             }
@@ -324,6 +347,10 @@ class badAssBJ extends JFrame{
 
     class StandAction implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+            ai1Card = new JToggleButton[5];
+            ai2Card = new JToggleButton[5];
+            ai3Card = new JToggleButton[5];
+            ai4Card = new JToggleButton[5];
             for(AIPlayer ai : AIPlayers) {
                 while(ai.shouldHit() && ai.getTotalCards() < 21) {
                     Card temp = deck.dealCard();
@@ -337,17 +364,27 @@ class badAssBJ extends JFrame{
                     dialogBox.append(ai.getName() + " chose to stand." + newline);
                 }
             }
+
+            findAwardWinner();
+
             setAi1Hand(gbc, AIPlayers[0].getNumOfCards(), AIPlayers[0].getName());
             setAi2Hand(gbc, AIPlayers[1].getNumOfCards(), AIPlayers[1].getName());
             setAi3Hand(gbc, AIPlayers[2].getNumOfCards(), AIPlayers[2].getName());
             setAi4Hand(gbc, AIPlayers[3].getNumOfCards(), AIPlayers[3].getName());
 
-            assignImage(AIPlayers[0].getHand(), AIPlayers[0].getNumOfCards(), ai1Card);
-            assignImage(AIPlayers[1].getHand(), AIPlayers[1].getNumOfCards(), ai2Card);
-            assignImage(AIPlayers[2].getHand(), AIPlayers[2].getNumOfCards(), ai3Card);
-            assignImage(AIPlayers[3].getHand(), AIPlayers[3].getNumOfCards(), ai4Card);
+            assignImage(AIPlayers[0].getHand(), AIPlayers[0].getNumOfCards(), ai1Card, 2);
+            assignImage(AIPlayers[1].getHand(), AIPlayers[1].getNumOfCards(), ai2Card, 2);
+            assignImage(AIPlayers[2].getHand(), AIPlayers[2].getNumOfCards(), ai3Card, 2);
+            assignImage(AIPlayers[3].getHand(), AIPlayers[3].getNumOfCards(), ai4Card, 2);
 
-            findAwardWinner();
+            revalidate();
+            repaint();
+
+            for(AIPlayer ai : AIPlayers) {
+                System.out.println(ai.getName());
+                ai.printHand();
+            }
+
             if(user.getChips() > 0) {
                 bet.setEnabled(true);
                 dialogBox.append(newline);
@@ -357,20 +394,29 @@ class badAssBJ extends JFrame{
             for(AIPlayer ai : AIPlayers) {
                 ai.resetHand();
             }
-            dealFirstCards();
+            ai1Card[0].setSelected(true);
+            ai1Card[1].setSelected(true);
+            ai2Card[0].setSelected(true);
+            ai2Card[1].setSelected(true);
+            ai3Card[0].setSelected(true);
+            ai3Card[1].setSelected(true);
+            ai4Card[0].setSelected(true);
+            ai4Card[1].setSelected(true);
 
-            setAi1Hand(gbc, AIPlayers[0].getNumOfCards(), AIPlayers[0].getName());
-            setAi2Hand(gbc, AIPlayers[1].getNumOfCards(), AIPlayers[1].getName());
-            setAi3Hand(gbc, AIPlayers[2].getNumOfCards(), AIPlayers[2].getName());
-            setAi4Hand(gbc, AIPlayers[3].getNumOfCards(), AIPlayers[3].getName());
+            playAgain.setVisible(true);
+            playAgain.addActionListener(new StartRoundAction());
 
-            assignImage(AIPlayers[0].getHand(), AIPlayers[0].getNumOfCards(), ai1Card);
-            assignImage(AIPlayers[1].getHand(), AIPlayers[1].getNumOfCards(), ai2Card);
-            assignImage(AIPlayers[2].getHand(), AIPlayers[2].getNumOfCards(), ai3Card);
-            assignImage(AIPlayers[3].getHand(), AIPlayers[3].getNumOfCards(), ai4Card);
+            playerCard = new JToggleButton[5];
+            ai1Card = new JToggleButton[5];
+            ai2Card = new JToggleButton[5];
+            ai3Card = new JToggleButton[5];
+            ai4Card = new JToggleButton[5];
 
-            setPlayerHand(gbc, user.getNumOfCards(), user.getName());
-            assignImage(user.getHand(), user.getNumOfCards(), playerCard);
+            pot.setText("Pot: 0");
+
+            bet.setEnabled(false);
+            stand.setEnabled(false);
+            hit.setEnabled(false);
         }
 
         public void findAwardWinner() {
@@ -380,12 +426,14 @@ class badAssBJ extends JFrame{
             }
             int winPlayer = 0; // 0 = user. 1 = ai1. 2 = ai2 .......
             for(int i = 0; i < 4; i++) {
-                if(AIPlayers[i].getTotalCards() > maxScore && AIPlayers[i].getTotalCards() <= 21) {
+                if(AIPlayers[i].getTotalCards() > maxScore && AIPlayers[i].getTotalCards() <= 21 && AIPlayers[i].getNumOfCards() < 6) {
                     maxScore = AIPlayers[i].getTotalCards();
                     winPlayer = i + 1;
                 }
             }
-
+            if(winPlayer != 0 && maxScore == user.getTotalCards()) {
+                winPlayer = 0;
+            }
             if(winPlayer == 0) {
                 user.getPot(roundPot);
                 int newWonChips = user.getChips();
@@ -418,8 +466,8 @@ class badAssBJ extends JFrame{
         }
     }
 
-    private void assignImage(Card[] hand, int numOfCard, JToggleButton[] arr) {
-        for (int i = 0; i < numOfCard; i++) {
+    private void assignImage(Card[] hand, int numOfCard, JToggleButton[] arr, int start) {
+        for (int i = start; i < numOfCard; i++) {
             if (hand[i].getValueName().equals("Ace") && hand[i].getSuit().equals("Hearts")) {
                 arr[i].setIcon(aceHeart);
             }
@@ -595,7 +643,7 @@ class badAssBJ extends JFrame{
             if (ycor == 1) {
                 gbc.gridx = xcor;
                 gbc.gridy = ycor;
-                mainTable.add(ai1Card[i] = new JToggleButton(backOfCard), gbc);
+                mainTable.add(ai1Card[i] = new JToggleButton(), gbc);
                 ycor = 2;
             }
             if(ycor == 2){
@@ -639,7 +687,7 @@ class badAssBJ extends JFrame{
             if (ycor == 3) {
                 gbc.gridx = xcor;
                 gbc.gridy = ycor;
-                mainTable.add(ai2Card[i] = new JToggleButton(backOfCard), gbc);
+                mainTable.add(ai2Card[i] = new JToggleButton(), gbc);
                 ycor = 4;
             }
             if(ycor == 4){
@@ -661,7 +709,7 @@ class badAssBJ extends JFrame{
             if (ycor == 5) {
                 gbc.gridx = xcor;
                 gbc.gridy = ycor;
-                mainTable.add(ai3Card[i] = new JToggleButton(backOfCard), gbc);
+                mainTable.add(ai3Card[i] = new JToggleButton(), gbc);
                 ycor = 6;
             }
             if(ycor == 6){
@@ -683,7 +731,7 @@ class badAssBJ extends JFrame{
             if (ycor == 3) {
                 gbc.gridx = xcor;
                 gbc.gridy = ycor;
-                mainTable.add(ai4Card[i] = new JToggleButton(backOfCard), gbc);
+                mainTable.add(ai4Card[i] = new JToggleButton(), gbc);
                 ycor = 4;
             }
             if(ycor == 4){
@@ -693,5 +741,391 @@ class badAssBJ extends JFrame{
                 xcor++;
             }
         }
+    }
+
+    private void initialBackOfCard(int numOfCard, JToggleButton[] arr, AIPlayer ai) {
+        Card[] aiHand = ai.getHand();
+        for (int i = 0; i < numOfCard; i++) {
+            arr[i].setIcon(backOfCard);
+            arr[i].setSelectedIcon(getCardIcon(aiHand[i]));
+            revalidate();
+            repaint();
+        }
+    }
+
+    public ImageIcon getCardIcon(Card card) {
+        if (card.getValueName().equals("Ace") && card.getSuit().equals("Hearts")) {
+            return aceHeart;
+        }
+        if (card.getValueName().equals("Ace") && card.getSuit().equals("Diamonds")) {
+            return aceDiamond;
+        }
+        if (card.getValueName().equals("Ace") && card.getSuit().equals("Clubs")) {
+            return aceClub;
+        }
+        if (card.getValueName().equals("Ace") && card.getSuit().equals("Spades")) {
+            return aceSpade;
+        }
+        if (card.getValueName().equals("Two") && card.getSuit().equals("Hearts")) {
+            return twoHeart;
+        }
+        if (card.getValueName().equals("Two") && card.getSuit().equals("Diamonds")) {
+            return twoDiamond;
+        }
+        if (card.getValueName().equals("Two") && card.getSuit().equals("Clubs")) {
+            return twoClub;
+        }
+        if (card.getValueName().equals("Two") && card.getSuit().equals("Spades")) {
+            return twoSpade;
+        }
+        if (card.getValueName().equals("Three") && card.getSuit().equals("Hearts")) {
+            return threeHeart;
+        }
+        if (card.getValueName().equals("Three") && card.getSuit().equals("Diamonds")) {
+            return threeDiamond;
+        }
+        if (card.getValueName().equals("Three") && card.getSuit().equals("Clubs")) {
+            return threeClub;
+        }
+        if (card.getValueName().equals("Three") && card.getSuit().equals("Spades")) {
+            return threeSpade;
+        }
+        if (card.getValueName().equals("Four") && card.getSuit().equals("Hearts")) {
+            return fourHeart;
+        }
+        if (card.getValueName().equals("Four") && card.getSuit().equals("Diamonds")) {
+            return fourDiamond;
+        }
+        if (card.getValueName().equals("Four") && card.getSuit().equals("Clubs")) {
+            return fourClub;
+        }
+        if (card.getValueName().equals("Four") && card.getSuit().equals("Spades")) {
+            return fourSpade;
+        }
+        if (card.getValueName().equals("Five") && card.getSuit().equals("Hearts")) {
+            return fiveHeart;
+        }
+        if (card.getValueName().equals("Five") && card.getSuit().equals("Diamonds")) {
+            return fiveDiamond;
+        }
+        if (card.getValueName().equals("Five") && card.getSuit().equals("Clubs")) {
+            return fiveClub;
+        }
+        if (card.getValueName().equals("Five") && card.getSuit().equals("Spades")) {
+            return fiveSpade;
+        }
+        if (card.getValueName().equals("Six") && card.getSuit().equals("Hearts")) {
+            return sixHeart;
+        }
+        if (card.getValueName().equals("Six") && card.getSuit().equals("Diamonds")) {
+            return sixDiamond;
+        }
+        if (card.getValueName().equals("Six") && card.getSuit().equals("Clubs")) {
+            return sixClub;
+        }
+        if (card.getValueName().equals("Six") && card.getSuit().equals("Spades")) {
+            return sixSpade;
+        }
+        if (card.getValueName().equals("Seven") && card.getSuit().equals("Hearts")) {
+            return sevenHeart;
+        }
+        if (card.getValueName().equals("Seven") && card.getSuit().equals("Diamonds")) {
+            return sevenDiamond;
+        }
+        if (card.getValueName().equals("Seven") && card.getSuit().equals("Clubs")) {
+            return sevenClub;
+        }
+        if (card.getValueName().equals("Seven") && card.getSuit().equals("Spades")) {
+            return sevenSpade;
+        }
+        if (card.getValueName().equals("Eight") && card.getSuit().equals("Hearts")) {
+            return eightHeart;
+        }
+        if (card.getValueName().equals("Eight") && card.getSuit().equals("Diamonds")) {
+            return eightDiamond;
+        }
+        if (card.getValueName().equals("Eight") && card.getSuit().equals("Clubs")) {
+            return eightClub;
+        }
+        if (card.getValueName().equals("Eight") && card.getSuit().equals("Spades")) {
+            return eightSpade;
+        }
+        if (card.getValueName().equals("Nine") && card.getSuit().equals("Hearts")) {
+            return nineHeart;
+        }
+        if (card.getValueName().equals("Nine") && card.getSuit().equals("Diamonds")) {
+            return nineDiamond;
+        }
+        if (card.getValueName().equals("Nine") && card.getSuit().equals("Clubs")) {
+            return nineClub;
+        }
+        if (card.getValueName().equals("Nine") && card.getSuit().equals("Spades")) {
+            return nineSpade;
+        }
+        if (card.getValueName().equals("Ten") && card.getSuit().equals("Hearts")) {
+            return tenHeart;
+        }
+        if (card.getValueName().equals("Ten") && card.getSuit().equals("Diamonds")) {
+            return tenDiamond;
+        }
+        if (card.getValueName().equals("Ten") && card.getSuit().equals("Clubs")) {
+            return tenClub;
+        }
+        if (card.getValueName().equals("Ten") && card.getSuit().equals("Spades")) {
+            return tenSpade;
+        }
+        if (card.getValueName().equals("Jack") && card.getSuit().equals("Hearts")) {
+            return jHeart;
+        }
+        if (card.getValueName().equals("Jack") && card.getSuit().equals("Diamonds")) {
+            return jDiamond;
+        }
+        if (card.getValueName().equals("Jack") && card.getSuit().equals("Clubs")) {
+            return jClub;
+        }
+        if (card.getValueName().equals("Jack") && card.getSuit().equals("Spades")) {
+            return jSpade;
+        }
+        if (card.getValueName().equals("Queen") && card.getSuit().equals("Hearts")) {
+            return qHeart;
+        }
+        if (card.getValueName().equals("Queen") && card.getSuit().equals("Diamonds")) {
+            return qDiamond;
+        }
+        if (card.getValueName().equals("Queen") && card.getSuit().equals("Clubs")) {
+            return qClub;
+        }
+        if (card.getValueName().equals("Queen") && card.getSuit().equals("Spades")) {
+            return qSpade;
+        }
+        if (card.getValueName().equals("King") && card.getSuit().equals("Hearts")) {
+            return kHeart;
+        }
+        if (card.getValueName().equals("King") && card.getSuit().equals("Diamonds")) {
+            return kDiamond;
+        }
+        if (card.getValueName().equals("King") && card.getSuit().equals("Clubs")) {
+            return kClub;
+        }
+        if (card.getValueName().equals("King") && card.getSuit().equals("Spades")) {
+            return kSpade;
+        }
+        else {
+            return bulldogFace;
+        }
+    }
+
+    private void flipCard(Card[] hand, JToggleButton[] arr, int numCards) {
+        for (int i = 0; i < 2; i++) {
+            if (hand[i].getValueName().equals("Ace") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setSelectedIcon(aceHeart);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Ace") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setSelectedIcon(aceDiamond);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Ace") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setSelectedIcon(aceClub);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Ace") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setSelectedIcon(aceSpade);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Two") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setSelectedIcon(twoHeart);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Two") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setSelectedIcon(twoDiamond);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Two") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setSelectedIcon(twoClub);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Two") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setSelectedIcon(twoSpade);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Three") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setSelectedIcon(threeHeart);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Three") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setSelectedIcon(threeDiamond);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Three") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setSelectedIcon(threeClub);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Three") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setSelectedIcon(threeSpade);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Four") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setSelectedIcon(fourHeart);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Four") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setSelectedIcon(fourDiamond);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Four") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setSelectedIcon(fourClub);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Four") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setSelectedIcon(fourSpade);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Five") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setSelectedIcon(fiveHeart);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Five") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setSelectedIcon(fiveDiamond);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Five") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setSelectedIcon(fiveClub);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Five") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setSelectedIcon(fiveSpade);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Six") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setSelectedIcon(sixHeart);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Six") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setSelectedIcon(sixDiamond);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Six") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setSelectedIcon(sixClub);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Six") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setSelectedIcon(sixSpade);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Seven") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setSelectedIcon(sevenHeart);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Seven") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setSelectedIcon(sevenDiamond);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Seven") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setSelectedIcon(sevenClub);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Seven") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setSelectedIcon(sevenSpade);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Eight") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setSelectedIcon(eightHeart);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Eight") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setSelectedIcon(eightDiamond);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Eight") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setSelectedIcon(eightClub);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Eight") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setSelectedIcon(eightSpade);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Nine") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setSelectedIcon(nineHeart);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Nine") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setSelectedIcon(nineDiamond);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Nine") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setSelectedIcon(nineClub);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Nine") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setSelectedIcon(nineSpade);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Ten") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setSelectedIcon(tenHeart);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Ten") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setSelectedIcon(tenDiamond);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Ten") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setSelectedIcon(tenClub);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Ten") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setSelectedIcon(tenSpade);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Jack") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setSelectedIcon(jHeart);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Jack") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setSelectedIcon(jDiamond);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Jack") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setSelectedIcon(jClub);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Jack") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setSelectedIcon(jSpade);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Queen") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setSelectedIcon(qHeart);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Queen") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setSelectedIcon(qDiamond);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Queen") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setSelectedIcon(qClub);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("Queen") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setSelectedIcon(qSpade);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("King") && hand[i].getSuit().equals("Hearts")) {
+                arr[i].setSelectedIcon(kHeart);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("King") && hand[i].getSuit().equals("Diamonds")) {
+                arr[i].setSelectedIcon(kDiamond);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("King") && hand[i].getSuit().equals("Clubs")) {
+                arr[i].setSelectedIcon(kClub);
+                arr[i].setSelected(true);
+            }
+            if (hand[i].getValueName().equals("King") && hand[i].getSuit().equals("Spades")) {
+                arr[i].setSelectedIcon(kSpade);
+                arr[i].setSelected(true);
+            }
+        }
+        //assignImage(hand, numCards, arr, 2);
     }
 }
