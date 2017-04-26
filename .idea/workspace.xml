@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec73c16e-a654-4e5e-906f-44bb10d0dc4c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project-Badass/com/company/Main.class" afterPath="$PROJECT_DIR$/out/production/Project-Badass/com/company/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project-Badass/com/company/badAssBJ$HitAction.class" afterPath="$PROJECT_DIR$/out/production/Project-Badass/com/company/badAssBJ$HitAction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project-Badass/com/company/badAssBJ$PlaceBetAction.class" afterPath="$PROJECT_DIR$/out/production/Project-Badass/com/company/badAssBJ$PlaceBetAction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project-Badass/com/company/badAssBJ$StandAction.class" afterPath="$PROJECT_DIR$/out/production/Project-Badass/com/company/badAssBJ$StandAction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project-Badass/com/company/badAssBJ.class" afterPath="$PROJECT_DIR$/out/production/Project-Badass/com/company/badAssBJ.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/Main.java" afterPath="$PROJECT_DIR$/src/com/company/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/badAssBJ.java" afterPath="$PROJECT_DIR$/src/com/company/badAssBJ.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -25,7 +18,7 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1067">
+            <state relative-caret-position="1344">
               <caret line="77" column="26" lean-forward="false" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
               <folding>
                 <element signature="e#436#437#0" expanded="true" />
@@ -50,8 +43,8 @@
       <file leaf-file-name="badAssBJ.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/badAssBJ.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="293" column="51" lean-forward="true" selection-start-line="293" selection-start-column="51" selection-end-line="293" selection-end-column="51" />
+            <state relative-caret-position="63">
+              <caret line="237" column="74" lean-forward="true" selection-start-line="237" selection-start-column="74" selection-end-line="237" selection-end-column="74" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#assignImage#0;class#badAssBJ#0" expanded="false" />
@@ -69,7 +62,7 @@
       <file leaf-file-name="AIPlayer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/AIPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="681">
+            <state relative-caret-position="1323">
               <caret line="63" column="5" lean-forward="false" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
               <folding />
             </state>
@@ -79,7 +72,7 @@
       <file leaf-file-name="Deck.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Deck.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
+            <state relative-caret-position="714">
               <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding />
             </state>
@@ -160,8 +153,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -194,7 +186,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -473,11 +466,12 @@
       <workItem from="1493058454753" duration="38000" />
       <workItem from="1493159648025" duration="43000" />
       <workItem from="1493159841356" duration="6197000" />
+      <workItem from="1493174473467" duration="558000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34687000" />
+    <option name="totallyTimeSpent" value="35245000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -492,7 +486,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2777168" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2766191" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -886,7 +880,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Deck.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
+        <state relative-caret-position="714">
           <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding />
         </state>
@@ -894,7 +888,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/AIPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="681">
+        <state relative-caret-position="1323">
           <caret line="63" column="5" lean-forward="false" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
           <folding />
         </state>
@@ -910,7 +904,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1067">
+        <state relative-caret-position="1344">
           <caret line="77" column="26" lean-forward="false" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
           <folding>
             <element signature="e#436#437#0" expanded="true" />
@@ -923,8 +917,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/badAssBJ.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="293" column="51" lean-forward="true" selection-start-line="293" selection-start-column="51" selection-end-line="293" selection-end-column="51" />
+        <state relative-caret-position="63">
+          <caret line="237" column="74" lean-forward="true" selection-start-line="237" selection-start-column="74" selection-end-line="237" selection-end-column="74" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#assignImage#0;class#badAssBJ#0" expanded="false" />

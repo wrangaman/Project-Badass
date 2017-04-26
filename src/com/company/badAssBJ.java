@@ -236,6 +236,7 @@ class badAssBJ extends JFrame{
 
             // Update dialog box
             dialogBox.append("Welcome " + user.getName() + "!" + newline);
+            dialogBox.append(user.getName() + " your total is " + user.getTotalCards() + "." + newline);
             dialogBox.append("Place your bet." + newline);
 
             startGame.setEnabled(false);
