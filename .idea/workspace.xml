@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec73c16e-a654-4e5e-906f-44bb10d0dc4c" name="Default" comment="">
+<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/AIPlayer.java" afterPath="$PROJECT_DIR$/src/com/company/AIPlayer.java" />
+=======
+>>>>>>> bee187af126fac27c9a3a617d967692f2a88dc75
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/company/badAssBJ.java" afterPath="$PROJECT_DIR$/src/com/company/badAssBJ.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -24,8 +27,13 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Player.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="-1468">
               <caret line="6" column="17" lean-forward="true" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="17" />
+=======
+            <state relative-caret-position="1344">
+              <caret line="77" column="26" lean-forward="false" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
+>>>>>>> bee187af126fac27c9a3a617d967692f2a88dc75
               <folding>
                 <element signature="e#1128#1129#0" expanded="true" />
                 <element signature="e#1152#1153#0" expanded="true" />
@@ -47,8 +55,13 @@
       <file leaf-file-name="badAssBJ.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/badAssBJ.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="300">
               <caret line="342" column="17" lean-forward="true" selection-start-line="342" selection-start-column="17" selection-end-line="342" selection-end-column="17" />
+=======
+            <state relative-caret-position="63">
+              <caret line="237" column="74" lean-forward="true" selection-start-line="237" selection-start-column="74" selection-end-line="237" selection-end-column="74" />
+>>>>>>> bee187af126fac27c9a3a617d967692f2a88dc75
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#assignImage#0;class#badAssBJ#0" expanded="false" />
@@ -62,8 +75,13 @@
       <file leaf-file-name="AIPlayer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/AIPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="242">
               <caret line="48" column="33" lean-forward="true" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
+=======
+            <state relative-caret-position="1323">
+              <caret line="63" column="5" lean-forward="false" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
+>>>>>>> bee187af126fac27c9a3a617d967692f2a88dc75
               <folding />
             </state>
           </provider>
@@ -72,7 +90,11 @@
       <file leaf-file-name="Deck.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/Deck.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="578">
+=======
+            <state relative-caret-position="714">
+>>>>>>> bee187af126fac27c9a3a617d967692f2a88dc75
               <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="false" />
@@ -162,8 +184,11 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="Scratches" />
       <pane id="Scope" />
+=======
+>>>>>>> bee187af126fac27c9a3a617d967692f2a88dc75
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -197,6 +222,11 @@
           </PATH>
         </subPane>
       </pane>
+<<<<<<< HEAD
+=======
+      <pane id="Scratches" />
+      <pane id="Scope" />
+>>>>>>> bee187af126fac27c9a3a617d967692f2a88dc75
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -651,12 +681,20 @@
       <workItem from="1493058454753" duration="38000" />
       <workItem from="1493159648025" duration="43000" />
       <workItem from="1493159841356" duration="6197000" />
+<<<<<<< HEAD
       <workItem from="1493175162268" duration="15140000" />
+=======
+      <workItem from="1493174473467" duration="558000" />
+>>>>>>> bee187af126fac27c9a3a617d967692f2a88dc75
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="49827000" />
+=======
+    <option name="totallyTimeSpent" value="35245000" />
+>>>>>>> bee187af126fac27c9a3a617d967692f2a88dc75
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -671,8 +709,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2769556" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+=======
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2766191" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+>>>>>>> bee187af126fac27c9a3a617d967692f2a88dc75
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1042,7 +1084,11 @@
     <entry file="file://$PROJECT_DIR$/../../Java Codes/assignment 1/assignment 1/src/gridbag.java" />
     <entry file="file://$PROJECT_DIR$/src/com/company/Deck.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="578">
+=======
+        <state relative-caret-position="714">
+>>>>>>> bee187af126fac27c9a3a617d967692f2a88dc75
           <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="false" />
@@ -1052,8 +1098,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="136">
           <caret line="9" column="28" lean-forward="false" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+=======
+        <state relative-caret-position="1323">
+          <caret line="63" column="5" lean-forward="false" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
+>>>>>>> bee187af126fac27c9a3a617d967692f2a88dc75
           <folding />
         </state>
       </provider>
@@ -1071,8 +1122,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/Player.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="-1468">
           <caret line="6" column="17" lean-forward="true" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="17" />
+=======
+        <state relative-caret-position="1344">
+          <caret line="77" column="26" lean-forward="false" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
+>>>>>>> bee187af126fac27c9a3a617d967692f2a88dc75
           <folding>
             <element signature="e#1128#1129#0" expanded="true" />
             <element signature="e#1152#1153#0" expanded="true" />
@@ -1090,8 +1146,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/badAssBJ.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="300">
           <caret line="342" column="17" lean-forward="true" selection-start-line="342" selection-start-column="17" selection-end-line="342" selection-end-column="17" />
+=======
+        <state relative-caret-position="63">
+          <caret line="237" column="74" lean-forward="true" selection-start-line="237" selection-start-column="74" selection-end-line="237" selection-end-column="74" />
+>>>>>>> bee187af126fac27c9a3a617d967692f2a88dc75
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#assignImage#0;class#badAssBJ#0" expanded="false" />
