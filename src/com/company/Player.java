@@ -1,5 +1,8 @@
 package com.company;
 
+/**
+ * Player class implements all functionality for a player in a game of Badass BlackJack.
+ */
 public class Player {
 	String name;
 	int chips;
@@ -7,7 +10,13 @@ public class Player {
 	int totalCards;
 	boolean blackJack;
 	boolean isOut;
-	
+
+	/**
+	 * Parameterized constructor. Sets this players name and chips
+	 *
+	 * @param n This player's name
+	 * @param c This player's chips
+	 */
 	public Player(String n, int c) {
 		name = n;
 		chips = c;
@@ -15,6 +24,9 @@ public class Player {
 		totalCards = 0;
 	}
 
+	/**
+	 * Constructor. Sets all values of this player to functionally null
+	 */
 	public Player() {
 		name = "";
 		chips = 0;
@@ -24,22 +36,48 @@ public class Player {
 		isOut = false;
 	}
 
+	/**
+	 * Simple getter for this player's name
+	 *
+	 * @return This player's name as a string
+	 */
 	public String getName(){
 		return name;
 	}
 
+	/**
+	 * Simple getter for this player's chips
+	 *
+	 * @return This player's number of chips as an integer
+	 */
 	public int getChips(){
 		return chips;
 	}
-	
+
+	/**
+	 * Flag for if this player has lost their round of blackjack
+	 *
+	 * @return true if the player has reached 0 chips, false otherwise
+	 */
 	public boolean getIsOut(){
 		return isOut;
 	}
-	
+
+	/**
+	 * Setter for if this player has lost their round
+	 *
+	 * @param x false if this player has lost their round, true otherwise
+	 */
 	public void setIsOut(boolean x){
 		isOut = x;
 	}
-	
+
+	/**
+	 * Implements functionality for this player to be dealt a card in a game of blackjack
+	 * Adds passed in card
+	 *
+	 * @param c
+	 */
 	public void recieveCard(Card c){
 		if(totalCards < 5 && getTotalCards() < 22 && !isOut){
 			hand[totalCards] = c;
@@ -128,7 +166,10 @@ public class Player {
 		}
 		return total;
 	}
-	
+
+	/**
+	 * Resets this player's hand
+	 */
 	public void resetHand(){
 		hand = new Card[5];
 		totalCards = 0;

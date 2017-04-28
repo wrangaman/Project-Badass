@@ -4,9 +4,16 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Deck class implements all functionality needed from a real deck of cards
+ * in a game of Badass BlackJack
+ */
 public class Deck {
-	Card deck[]; 
-	
+	Card deck[];
+
+	/**
+	 * Constructor. Fill this deck's card array with all 52 unique values
+	 */
 	public Deck() {
 		deck = new Card[52];
 		int x = 0;
@@ -17,19 +24,31 @@ public class Deck {
 			}
 		}
 	}
+
+	/**
+	 * Sets every card in this deck as not used. Used to reset the deck
+	 */
 	public void setIsUsed(){
 		for(int i = 0; i < 52; i++){
 			deck[i].setIsUsed(false);
 		}
 	}
-	
+
+	/**
+	 * Randomized the order of cards in this deck's array of cards
+	 */
 	public void shuffleDeck(){
 		setIsUsed();
 		List<Card> list =  Arrays.asList(deck);
 		Collections.shuffle(list);
 		deck = list.toArray(deck);
 	}
-		
+
+	/**
+	 * Deals the top card of this deck. Best if this deck is randomized before
+	 *
+	 * @return Top card object of this deck
+	 */
 	public Card dealCard(){
 		int i = 0;
 		boolean loop = true; 
@@ -42,12 +61,5 @@ public class Deck {
 		}
 		deck[i].setIsUsed(true);
 		return deck[i];
-	}
-	
-	
-	public void printDeck(){
-		for(int i = 0; i < 52; i++){
-			System.out.println(deck[i].toString());
-		}
 	}
 }

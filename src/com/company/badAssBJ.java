@@ -221,52 +221,59 @@ class badAssBJ extends JFrame{
 
     class StartRoundAction implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            playAgain.setVisible(false);
-            stand.setEnabled(false);
-            hit.setEnabled(false);
-            bet.setEnabled(true);
-            mainTable.removeAll();
-            // Make deck, player and AI objects
-            user = new Player(player.getSelectedItem().toString(), Integer.parseInt(chip.getText()));
-            AIPlayers = new AIPlayer[4];
-            deck = new Deck();
-            deck.shuffleDeck();
-            for(int i = 0; i < 4; i++) {
-                AIPlayers[i] = new AIPlayer(1);
+            JFrame errorFrame = new JFrame();
+            if (chip.getText().equals("") || player.getSelectedItem().equals("")) {
+                JOptionPane.showMessageDialog(errorFrame, "Enter a name and amount of chips you want to play with.",
+                        "Input Error",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                playAgain.setVisible(false);
+                stand.setEnabled(false);
+                hit.setEnabled(false);
+                bet.setEnabled(true);
+                mainTable.removeAll();
+                // Make deck, player and AI objects
+                user = new Player(player.getSelectedItem().toString(), Integer.parseInt(chip.getText()));
+                AIPlayers = new AIPlayer[4];
+                deck = new Deck();
+                deck.shuffleDeck();
+                for (int i = 0; i < 4; i++) {
+                    AIPlayers[i] = new AIPlayer(1);
+                }
+                // Deal initial 2 cards to every player
+                dealFirstCards();
+                // Update hand displays
+                setPlayerHand(gbc, user.getNumOfCards(), user.getName());
+                assignImage(user.getHand(), user.getNumOfCards(), playerCard, 0);
+                user.printHand();
+                setAi1Hand(gbc, AIPlayers[0].getNumOfCards(), AIPlayers[0].getName());
+                setAi2Hand(gbc, AIPlayers[1].getNumOfCards(), AIPlayers[1].getName());
+                setAi3Hand(gbc, AIPlayers[2].getNumOfCards(), AIPlayers[2].getName());
+                setAi4Hand(gbc, AIPlayers[3].getNumOfCards(), AIPlayers[3].getName());
+
+                initialBackOfCard(AIPlayers[0].getNumOfCards(), ai1Card, AIPlayers[0]);
+                initialBackOfCard(AIPlayers[1].getNumOfCards(), ai2Card, AIPlayers[1]);
+                initialBackOfCard(AIPlayers[2].getNumOfCards(), ai3Card, AIPlayers[2]);
+                initialBackOfCard(AIPlayers[3].getNumOfCards(), ai4Card, AIPlayers[3]);
+
+                revalidate();
+                repaint();
+
+                setPot(gbc);
+
+
+                // Update dialog box
+                dialogBox.append("Welcome " + user.getName() + "!" + newline);
+
+                dialogBox.append(user.getName() + ", your total is " + user.getTotalCards() + "." + newline);
+
+                dialogBox.append("Place your bet." + newline);
+
+                startGame.setEnabled(false);
+                bet.addActionListener(new PlaceBetAction());
+                revalidate();
+                repaint();
             }
-            // Deal initial 2 cards to every player
-            dealFirstCards();
-            // Update hand displays
-            setPlayerHand(gbc, user.getNumOfCards(), user.getName());
-            assignImage(user.getHand(), user.getNumOfCards(), playerCard, 0);
-            user.printHand();
-            setAi1Hand(gbc, AIPlayers[0].getNumOfCards(), AIPlayers[0].getName());
-            setAi2Hand(gbc, AIPlayers[1].getNumOfCards(), AIPlayers[1].getName());
-            setAi3Hand(gbc, AIPlayers[2].getNumOfCards(), AIPlayers[2].getName());
-            setAi4Hand(gbc, AIPlayers[3].getNumOfCards(), AIPlayers[3].getName());
-
-            initialBackOfCard(AIPlayers[0].getNumOfCards(),ai1Card, AIPlayers[0]);
-            initialBackOfCard(AIPlayers[1].getNumOfCards(),ai2Card, AIPlayers[1]);
-            initialBackOfCard(AIPlayers[2].getNumOfCards(),ai3Card, AIPlayers[2]);
-            initialBackOfCard(AIPlayers[3].getNumOfCards(),ai4Card, AIPlayers[3]);
-
-            revalidate();
-            repaint();
-
-            setPot(gbc);
-
-
-            // Update dialog box
-            dialogBox.append("Welcome " + user.getName() + "!" + newline);
-
-            dialogBox.append(user.getName() + ", your total is " + user.getTotalCards() + "." + newline);
-
-            dialogBox.append("Place your bet." + newline);
-
-            startGame.setEnabled(false);
-            bet.addActionListener(new PlaceBetAction());
-            revalidate();
-            repaint();
         }
 
         public void dealFirstCards() {
@@ -293,12 +300,16 @@ class badAssBJ extends JFrame{
         public void actionPerformed(ActionEvent event) {
             hit.setEnabled(true);
             stand.setEnabled(true);
-            bet.setEnabled(false);
             roundPot = 0;
+            JFrame errorFrame = new JFrame();
+            if (displayOfAmountToBet.getText().equals("")){
+                JOptionPane.showMessageDialog(errorFrame, "You need to enter a bet.",
+                        "Input Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
             int maxBet = Integer.parseInt(chip.getText());
             int currBet = Integer.parseInt(displayOfAmountToBet.getText());
-            JFrame errorFrame = new JFrame();
-            if (currBet > maxBet || currBet < 1 || displayOfAmountToBet.getText().equals("")) {
+            if (currBet > maxBet || currBet < 1 || displayOfAmountToBet.getText().trim().equals("")) {
                 JOptionPane.showMessageDialog(errorFrame, "The amount you entered is invalid. You can only enter a number between 1 and the amount of chips that you have.",
                         "Input Error",
                         JOptionPane.ERROR_MESSAGE);
@@ -322,6 +333,7 @@ class badAssBJ extends JFrame{
                 int updatedChips = user.getChips();
                 chip.setText(Integer.toString(updatedChips));
             }
+            bet.setEnabled(false);
         }
     }
 
