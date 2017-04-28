@@ -33,7 +33,7 @@ class badAssBJ extends JFrame{
     private JButton bet = new JButton("Place Bet");
     private JButton hit = new JButton("Hit");
     private JButton stand = new JButton("Stand");
-    private JLabel amountToBet = new JLabel("Enter the amount to bet: (Integers Only)");
+    private JLabel amountToBet = new JLabel("Enter the amount to bet:");
     private JTextField displayOfAmountToBet = new JTextField("");
     private JLabel pot = new JLabel("Pot: 0");
     private JButton playAgain = new JButton("Play Again");
@@ -120,17 +120,12 @@ class badAssBJ extends JFrame{
 
     GridBagConstraints gbc;
 
-    /*private Player[] players;
-
-    public tablePanel(Player[] atTable) {
-        players = atTable;
-
-    }*/
     public badAssBJ() {
         hit.addActionListener(new HitAction());
         stand.addActionListener(new StandAction());
         playAgain.setVisible(false);
         pot.setFont(new Font("Arial", Font.PLAIN, 30));
+
         // Make editable combobox
         player = new JComboBox<>(model);
         player.setEditable(true);
@@ -177,9 +172,6 @@ class badAssBJ extends JFrame{
         gbc.gridx = 0;
         gbc.gridy = 2;
         playerPanel.add(startGame, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        playerPanel.add(playAgain, gbc);
 
         actionPanel.setLayout(new GridBagLayout());
         gbc.gridx = 0;
@@ -197,6 +189,9 @@ class badAssBJ extends JFrame{
         gbc.gridx = 1;
         gbc.gridy = 2;
         actionPanel.add(stand, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        actionPanel.add(playAgain, gbc);
 
         dialogBox = new JTextArea(10, 100);
         JScrollPane scrollPane = new JScrollPane(dialogBox);
@@ -296,10 +291,7 @@ class badAssBJ extends JFrame{
 
     class PlaceBetAction implements ActionListener {
         int userBet;
-
         public void actionPerformed(ActionEvent event) {
-            hit.setEnabled(true);
-            stand.setEnabled(true);
             roundPot = 0;
             JFrame errorFrame = new JFrame();
             if (displayOfAmountToBet.getText().equals("")){
@@ -315,24 +307,28 @@ class badAssBJ extends JFrame{
                         JOptionPane.ERROR_MESSAGE);
                 displayOfAmountToBet.setText("");
             }
-            while (displayOfAmountToBet.getText() != null) {
-                userBet = Integer.parseInt(displayOfAmountToBet.getText());
-                displayOfAmountToBet.setText("");
-                roundPot = roundPot + userBet;
-                user.placeBet(userBet);
-                dialogBox.append("You bet " + userBet + " chips" + newline);
-                bet.setEnabled(false);
+            else {
+                hit.setEnabled(true);
+                stand.setEnabled(true);
+                while (displayOfAmountToBet.getText() != null) {
+                    userBet = Integer.parseInt(displayOfAmountToBet.getText());
+                    displayOfAmountToBet.setText("");
+                    roundPot = roundPot + userBet;
+                    user.placeBet(userBet);
+                    dialogBox.append("You bet " + userBet + " chips" + newline);
+                    bet.setEnabled(false);
 
-                for (AIPlayer ai : AIPlayers) {
-                    int aiBet = ai.amountToBet(userBet);
-                    ai.placeBet(aiBet);
-                    roundPot = roundPot + aiBet;
-                    dialogBox.append(ai.getName() + " bet " + aiBet + " chips" + newline);
+                    for (AIPlayer ai : AIPlayers) {
+                        int aiBet = ai.amountToBet(userBet);
+                        ai.placeBet(aiBet);
+                        roundPot = roundPot + aiBet;
+                        dialogBox.append(ai.getName() + " bet " + aiBet + " chips" + newline);
+                    }
+                    pot.setText("Pot: " + roundPot);
+                    dialogBox.append("Total pot this round: " + roundPot + newline);
+                    int updatedChips = user.getChips();
+                    chip.setText(Integer.toString(updatedChips));
                 }
-                pot.setText("Pot: " + roundPot);
-                dialogBox.append("Total pot this round: " + roundPot + newline);
-                int updatedChips = user.getChips();
-                chip.setText(Integer.toString(updatedChips));
             }
         }
     }
