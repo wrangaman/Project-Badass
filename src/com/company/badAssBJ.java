@@ -223,7 +223,7 @@ class badAssBJ extends JFrame{
         public void actionPerformed(ActionEvent event) {
             JFrame errorFrame = new JFrame();
             if (chip.getText().equals("") || player.getSelectedItem().equals("")) {
-                JOptionPane.showMessageDialog(errorFrame, "Enter a name and amount of chips you want to play with.",
+                JOptionPane.showMessageDialog(errorFrame, "Enter a name and/or amount of chips you want to play with.",
                         "Input Error",
                         JOptionPane.ERROR_MESSAGE);
             } else {
@@ -321,6 +321,7 @@ class badAssBJ extends JFrame{
                 roundPot = roundPot + userBet;
                 user.placeBet(userBet);
                 dialogBox.append("You bet " + userBet + " chips" + newline);
+                bet.setEnabled(false);
 
                 for (AIPlayer ai : AIPlayers) {
                     int aiBet = ai.amountToBet(userBet);
@@ -333,7 +334,6 @@ class badAssBJ extends JFrame{
                 int updatedChips = user.getChips();
                 chip.setText(Integer.toString(updatedChips));
             }
-            bet.setEnabled(false);
         }
     }
 
