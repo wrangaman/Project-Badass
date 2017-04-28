@@ -127,6 +127,8 @@ class badAssBJ extends JFrame{
 
     }*/
     public badAssBJ() {
+        hit.addActionListener(new HitAction());
+        stand.addActionListener(new StandAction());
         playAgain.setVisible(false);
         pot.setFont(new Font("Arial", Font.PLAIN, 30));
         // Make editable combobox
@@ -256,11 +258,9 @@ class badAssBJ extends JFrame{
 
             // Update dialog box
             dialogBox.append("Welcome " + user.getName() + "!" + newline);
-<<<<<<< HEAD
+
             dialogBox.append(user.getName() + ", your total is " + user.getTotalCards() + "." + newline);
-=======
-            dialogBox.append(user.getName() + " your total is " + user.getTotalCards() + "." + newline);
->>>>>>> bee187af126fac27c9a3a617d967692f2a88dc75
+
             dialogBox.append("Place your bet." + newline);
 
             startGame.setEnabled(false);
@@ -293,11 +293,12 @@ class badAssBJ extends JFrame{
         public void actionPerformed(ActionEvent event) {
             hit.setEnabled(true);
             stand.setEnabled(true);
+            bet.setEnabled(false);
             roundPot = 0;
             int maxBet = Integer.parseInt(chip.getText());
             int currBet = Integer.parseInt(displayOfAmountToBet.getText());
             JFrame errorFrame = new JFrame();
-            if (currBet > maxBet || currBet < 1) {
+            if (currBet > maxBet || currBet < 1 || displayOfAmountToBet.getText().equals("")) {
                 JOptionPane.showMessageDialog(errorFrame, "The amount you entered is invalid. You can only enter a number between 1 and the amount of chips that you have.",
                         "Input Error",
                         JOptionPane.ERROR_MESSAGE);
@@ -320,27 +321,34 @@ class badAssBJ extends JFrame{
                 dialogBox.append("Total pot this round: " + roundPot + newline);
                 int updatedChips = user.getChips();
                 chip.setText(Integer.toString(updatedChips));
-                bet.setEnabled(false);
-                hit.addActionListener(new HitAction());
-                stand.addActionListener(new StandAction());
             }
         }
     }
 
     class HitAction implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            if(user.getTotalCards() <= 21 || user.getHand().length < 5) {
+            if(user.getTotalCards() <= 21 && user.getNumOfCards() < 5) {
                 user.recieveCard(deck.dealCard());
                 setPlayerHand(gbc, user.getNumOfCards(), user.getName());
                 assignImage(user.getHand(), user.getNumOfCards(), playerCard, 0);
                 dialogBox.append("Your new total is " + user.getTotalCards() + newline);
                 user.printHand();
+                if(user.isBusted()) {
+                    dialogBox.append("You busted!" + newline);
+                    hit.setEnabled(false);
+                    stand.doClick(1000);
+                }
+                if(!user.isBusted() && user.getNumOfCards() == 5) {
+                    dialogBox.append("Special Rule: If you have 5 cards in hand and are under 21 then you" +
+                            "automatically gets 21." + newline);
+                    user.setScore();
+                }
             }
             else {
                 if(user.isBusted()) {
                     dialogBox.append("You busted!" + newline);
                 }
-                else {
+                else if(user.getNumOfCards() == 5){
                     dialogBox.append("Special Rule: If you have 5 cards in hand and are under 21 then you" +
                             "automatically gets 21." + newline);
                     user.setScore();
@@ -408,7 +416,7 @@ class badAssBJ extends JFrame{
             ai4Card[1].setSelected(true);
 
             playAgain.setVisible(true);
-            playAgain.addActionListener(new StartRoundAction());
+            playAgain.addActionListener(new PlayNewGame());
 
             playerCard = new JToggleButton[5];
             ai1Card = new JToggleButton[5];
@@ -1131,5 +1139,73 @@ class badAssBJ extends JFrame{
             }
         }
         //assignImage(hand, numCards, arr, 2);
+    }
+
+    class PlayNewGame implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            playAgain.setVisible(false);
+            stand.setEnabled(false);
+            hit.setEnabled(false);
+            bet.setEnabled(true);
+            user.resetHand();
+            for(AIPlayer ai : AIPlayers) {
+                ai.resetHand();
+            }
+            ai1Card = new JToggleButton[5];
+            ai2Card = new JToggleButton[5];
+            ai3Card = new JToggleButton[5];
+            ai4Card = new JToggleButton[5];
+            mainTable.removeAll();
+            deck = new Deck();
+            deck.shuffleDeck();
+            // Deal initial 2 cards to every player
+            dealFirstCards();
+            // Update hand displays
+            setPlayerHand(gbc, user.getNumOfCards(), user.getName());
+            assignImage(user.getHand(), user.getNumOfCards(), playerCard, 0);
+            user.printHand();
+            setAi1Hand(gbc, AIPlayers[0].getNumOfCards(), AIPlayers[0].getName());
+            setAi2Hand(gbc, AIPlayers[1].getNumOfCards(), AIPlayers[1].getName());
+            setAi3Hand(gbc, AIPlayers[2].getNumOfCards(), AIPlayers[2].getName());
+            setAi4Hand(gbc, AIPlayers[3].getNumOfCards(), AIPlayers[3].getName());
+
+            initialBackOfCard(AIPlayers[0].getNumOfCards(),ai1Card, AIPlayers[0]);
+            initialBackOfCard(AIPlayers[1].getNumOfCards(),ai2Card, AIPlayers[1]);
+            initialBackOfCard(AIPlayers[2].getNumOfCards(),ai3Card, AIPlayers[2]);
+            initialBackOfCard(AIPlayers[3].getNumOfCards(),ai4Card, AIPlayers[3]);
+
+            revalidate();
+            repaint();
+
+            setPot(gbc);
+
+
+            // Update dialog box
+
+            dialogBox.append(user.getName() + ", your total is " + user.getTotalCards() + "." + newline);
+
+            dialogBox.append("Place your bet." + newline);
+
+            startGame.setEnabled(false);
+            revalidate();
+            repaint();
+        }
+
+        public void dealFirstCards() {
+            dealCard(user, deck);
+            dealCard(user, deck);
+            for(AIPlayer a : AIPlayers) {
+                dealCardAI(a, deck);
+                dealCardAI(a, deck);
+            }
+        }
+
+        public void dealCard(Player p, Deck d) {
+            p.recieveCard(d.dealCard());
+        }
+
+        public void dealCardAI(AIPlayer ai, Deck d) {
+            ai.recieveCard(d.dealCard());
+        }
     }
 }
