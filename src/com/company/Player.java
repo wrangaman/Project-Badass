@@ -76,7 +76,7 @@ public class Player {
 	 * Implements functionality for this player to be dealt a card in a game of blackjack
 	 * Adds passed in card
 	 *
-	 * @param c
+	 * @param c Card object to deal to player
 	 */
 	public void recieveCard(Card c){
 		if(totalCards < 5 && getTotalCards() < 22 && !isOut){
@@ -89,9 +89,9 @@ public class Player {
 		return totalCards;
 	}
 
-	/** Check if player hand sum > 21
+	/** Check if player hand sum is less than or equal to 21
 	 *
-	 * @return
+	 * @return true if this player's hand sum is less than or equal to 21, false otherwise
 	 */
 	public boolean isBusted() {
 		if(21 < getTotalCards()) {
@@ -102,7 +102,8 @@ public class Player {
 
 	/** Remove number of chips bet from total chips
 	 *
-	 * @param x
+	 * @param x Chips to remove from this player's chips
+	 *
 	 */
 	public void placeBet(int x){
 		chips = chips - x;
@@ -110,7 +111,7 @@ public class Player {
 
 	/** Add number of chips won to total chips
 	 *
-	 * @param x
+	 * @param x Chips to add to this players chips
 	 */
 	public void getPot(int x) {
 		chips = chips + x;
@@ -118,7 +119,7 @@ public class Player {
 
 	/** Return card array of hand
 	 *
-	 * @return
+	 * @return Array of cards that make up this player's hand
 	 */
 	public Card[] getHand(){
 		return hand;
@@ -126,7 +127,7 @@ public class Player {
 
 	/** Returns hand sum. If ace can be valued
 	 *
-	 * @return
+	 * @return Sum of face value of all cards in this player's hand
 	 */
 	public int getTotalCards(){
 		int sum = 0;
@@ -144,10 +145,8 @@ public class Player {
         }
 		return sum;
 	}
-	/** prints hand
-	 * @return 
-	 *
-	 * @return
+	/**
+	 * Prints this player's hand
 	 */
 	public void printHand(){
 		for(Card i : hand){
@@ -156,7 +155,8 @@ public class Player {
 		}
 	}
 	/** Set score to 21 if player if has 5 card in hand and total is under 21
-	 * @return 
+	 *
+	 * @return This player's total number of cards
 	 */
 	public int setScore(){
 		int total = getTotalCards();
