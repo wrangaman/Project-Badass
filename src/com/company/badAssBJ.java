@@ -33,7 +33,7 @@ class badAssBJ extends JFrame{
     private JButton bet = new JButton("Place Bet");
     private JButton hit = new JButton("Hit");
     private JButton stand = new JButton("Stand");
-    private JLabel amountToBet = new JLabel("Enter the amount to bet:");
+    private JLabel amountToBet = new JLabel("Enter the amount to bet: (Integer)");
     private JTextField displayOfAmountToBet = new JTextField("");
     private JLabel pot = new JLabel("Pot: 0");
     private JButton playAgain = new JButton("Play Again");
@@ -216,6 +216,8 @@ class badAssBJ extends JFrame{
 
     class StartRoundAction implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+            player.setEditable(false);
+            chip.setEditable(false);
             JFrame errorFrame = new JFrame();
             if (chip.getText().equals("") || player.getSelectedItem().equals("")) {
                 JOptionPane.showMessageDialog(errorFrame, "Enter a name and/or amount of chips you want to play with.",
